@@ -2,7 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Icon1 from "../assets/favicon.png"
+import IngredientsIcon from '@material-ui/icons/Kitchen';
+import RecipeIcon from '@material-ui/icons/ImportContacts';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import GroceryIcon from '@material-ui/icons/ListAlt';
 
 const useStyles = makeStyles({
     root: {
@@ -23,10 +26,10 @@ const NavBar = () => {
             showLabels
             className={classes.root}
         >
-            <BottomNavigationAction label="Ingredients" icon={Icon1} />
-            <BottomNavigationAction label="Recipes" icon={Icon1} />
-            <BottomNavigationAction label="Liked" icon={Icon1} />
-            <BottomNavigationAction label="Groceries" icon={Icon1} />
+            <BottomNavigationAction label="Ingredients" icon={<IngredientsIcon />} />
+            <BottomNavigationAction label="Recipes" icon={<RecipeIcon />} />
+            <BottomNavigationAction label="Liked" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Groceries" icon={<GroceryIcon />} />
         </BottomNavigation>
     );
 }
