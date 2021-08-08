@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-//import RestoreIcon from '@material-ui/icons/Restore';
+import Icon1 from "../assets/favicon.png"
 
 const useStyles = makeStyles({
     root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     },
 });
 
-const navBar = () => {
+const NavBar = () => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -23,11 +23,12 @@ const navBar = () => {
             showLabels
             className={classes.root}
         >
-            <BottomNavigationAction label="Recents" />
-            <BottomNavigationAction label="Favorites" />
-            <BottomNavigationAction label="Nearby" />
+            <BottomNavigationAction label="Ingredients" icon={Icon1} />
+            <BottomNavigationAction label="Recipes" icon={Icon1} />
+            <BottomNavigationAction label="Liked" icon={Icon1} />
+            <BottomNavigationAction label="Groceries" icon={Icon1} />
         </BottomNavigation>
     );
 }
 
-export default navBar
+export default NavBar

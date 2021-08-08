@@ -1,11 +1,11 @@
 import {View} from "react-native";
 import React from "react";
 
-const groceriesScreen = () => {
+const RecipesScreen = () => {
     return (
         <View>
-            <h1> Groceries screen </h1>
+            <h1> recipes screen </h1>
         </View>
     );
 }
-export default groceriesScreen
+export default RecipesScreen

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
-import ingredientsScreen from "./pages/ingredientsScreen";
-import recipesScreen from "./pages/recipesScreen";
-import likedScreen from "./pages/likedScreen";
-import singleRecipeScreen from "./pages/singleRecipeScreen";
-import loadingScreen from "./pages/loadingScreen";
-import groceriesScreen from "./pages/groceriesScreen";
+import ingredientsScreen from "./pages/IngredientsScreen";
+import recipesScreen from "./pages/RecipesScreen";
+import likedScreen from "./pages/LikedScreen";
+import singleRecipeScreen from "./pages/SingleRecipeScreen";
+import loadingScreen from "./pages/LoadingScreen";
+import groceriesScreen from "./pages/GroceriesScreen";
 
 export default function App() {
   return (
