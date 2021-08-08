@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { BrowserRouter, Route } from "react-router-dom";
+import ingredientsScreen from "./pages/ingredientsScreen";
+import recipesScreen from "./pages/recipesScreen";
+import likedScreen from "./pages/likedScreen";
+import singleRecipeScreen from "./pages/singleRecipeScreen";
+import loadingScreen from "./pages/loadingScreen";
+import groceriesScreen from "./pages/groceriesScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <BrowserRouter>
+      <Route path = "/ingredients" component = {ingredientsScreen} />
+      <Route path = "/" exact={true} component = {ingredientsScreen} />
+      <Route path = "/recipes" component = {recipesScreen} />
+      <Route path = "/liked" component = {likedScreen} />
+      <Route path = "/singlerecipe" component = {singleRecipeScreen} />
+      <Route path = "/loading" component = {loadingScreen} />
+      <Route path = "/groceries" component={groceriesScreen}/>
+    </BrowserRouter>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
