@@ -1,10 +1,10 @@
-import {View} from "react-native";
+import {Text, View} from "react-native";
 import React from "react";
 
 const LikedScreen = () => {
     return (
         <View>
-            <h1> liked recipes screen </h1>
+            <Text> liked recipes screen </Text>
         </View>
     );
 }
