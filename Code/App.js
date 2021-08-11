@@ -9,15 +9,28 @@ import LikedScreen from "./app/screens/LikedScreen";
 import GroceriesScreen from "./app/screens/GroceriesScreen";
 import SingleRecipeScreen from "./app/screens/SingleRecipeScreen";
 import LoadingScreen from "./app/screens/LoadingScreen";
-import NavBar from "./app/components/NavBar";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const headerOptions = {
+    headerStyle: {
+      backgroundColor: '#f4511e',
+      height: '30%'
+    }
+  }
+
   return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Ingredients" NavBar={(props) => <NavBar {...props} />}>
-          <Stack.Screen name="Ingredients" component={IngredientsScreen} />
+        <Stack.Navigator initialRouteName="Ingredients" >
+          <Stack.Screen name="Ingredients" component={IngredientsScreen}
+          options={{
+            title: 'My Pantry',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+              height: 180,
+            }
+          }}/>
           <Stack.Screen name="Recipes" component={RecipesScreen} />
           <Stack.Screen name="Liked" component={LikedScreen} />
           <Stack.Screen name="Groceries" component={GroceriesScreen} />
@@ -35,4 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headerStyle: {
+    backgroundColor: '#f4511e'
+  }
 });
