@@ -1,14 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from "@react-navigation/native";
+
+import IngredientsScreen from "./app/screens/IngredientsScreen";
+import RecipesScreen from "./app/screens/RecipesScreen";
+import LikedScreen from "./app/screens/LikedScreen";
+import GroceriesScreen from "./app/screens/GroceriesScreen";
+import SingleRecipeScreen from "./app/screens/SingleRecipeScreen";
+import LoadingScreen from "./app/screens/LoadingScreen";
+import NavBar from "./app/components/NavBar";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!  connor</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Ingredients" NavBar={(props) => <NavBar {...props} />}>
+          <Stack.Screen name="Ingredients" component={IngredientsScreen} />
+          <Stack.Screen name="Recipes" component={RecipesScreen} />
+          <Stack.Screen name="Liked" component={LikedScreen} />
+          <Stack.Screen name="Groceries" component={GroceriesScreen} />
+          <Stack.Screen name="SingleRecipe" component={SingleRecipeScreen} />
+          <Stack.Screen name="Loading" component={LoadingScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({

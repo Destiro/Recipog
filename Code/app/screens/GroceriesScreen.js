@@ -1,6 +1,9 @@
 import React from 'react';
+import Colours from "../config/Colours";
+import { StyleSheet, Text, View } from 'react-native';
+import NavBar from "../components/NavBar";
 
-function GroceriesScreen(props) {
+const GroceriesScreen = () =>  {
     return (
         <View>
 
