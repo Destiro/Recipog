@@ -23,7 +23,7 @@ const NavBar = () => {
                 options={{
                     tabBarLabel: 'My Pantry',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                        <MaterialCommunityIcons name="fridge" color={color} size={size} />
                     ),
                 }}
             />
@@ -33,9 +33,8 @@ const NavBar = () => {
                 options={{
                     tabBarLabel: 'Recipes',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="bell" color={color} size={size} />
+                        <MaterialCommunityIcons name="pot-steam" color={color} size={size} />
                     ),
-                    tabBarBadge: 3,
                 }}
             />
             <Tab.Screen
@@ -44,7 +43,7 @@ const NavBar = () => {
                 options={{
                     tabBarLabel: 'Favourites',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        <MaterialCommunityIcons name="heart" color={color} size={size} />
                     ),
                 }}
             />
@@ -54,7 +53,7 @@ const NavBar = () => {
                 options={{
                     tabBarLabel: 'Groceries',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
                     ),
                 }}
             />
