@@ -11,8 +11,6 @@ const IngredientsScreen = () => {
             <View style={styles.listView}>
 
             </View>
-            <View style={styles.bottomNav}>
-            </View>
         </View>
     );
 }
@@ -23,20 +21,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     titleHeader: {
-        backgroundColor: Colours.blue_primary,
+        backgroundColor: Colours.light_grey,
         width: '100%',
-        height: '25%',
+        height: '15%',
     },
     listView: {
-        backgroundColor: Colours.purple_primary,
+        backgroundColor: Colours.white,
         width: '100%',
-        height: '67%',
+        height: '85%',
     },
-    bottomNav: {
-        backgroundColor: Colours.blue_secondary,
-        width: '100%',
-        height: '8%',
-    }
 });
 
 export default IngredientsScreen;

@@ -11,5 +11,6 @@ export default {
     //Standard Colours
     black: '#000',
     white: '#fff',
-    light_grey: '#cfcfcf',
+    light_grey: '#dedede',
+    dark_grey: '#888888'
 }
