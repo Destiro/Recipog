@@ -1,9 +1,8 @@
 import React from 'react';
 import Colours from "../config/Colours";
 import { StyleSheet, Text, View } from 'react-native';
-import NavBar from "../components/NavBar";
 
-const IngredientsScreen = ({navigation}) => {
+const IngredientsScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.titleHeader}>
@@ -13,7 +12,6 @@ const IngredientsScreen = ({navigation}) => {
 
             </View>
             <View style={styles.bottomNav}>
-                <NavBar nav={navigation} />
             </View>
         </View>
     );

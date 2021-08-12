@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@react-navigation/native": "^6.0.2"
+    "@react-navigation/native": "^6.0.2",
+    "react-native-vector-icons": "^8.1.0"
   },
   "private": true
 }
