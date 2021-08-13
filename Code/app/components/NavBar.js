@@ -65,7 +65,7 @@ const NavBar = () => {
                 }}
             />
             <Tab.Screen
-                name="Liked"
+                name="Liked Recipes"
                 component={LikedScreen}
                 options={{
                     tabBarLabel: 'Favourites',
