@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 
 import Colours from "../config/Colours";
+import Display from "../config/Display";
 import {db} from "../config/FirebaseConfig";
 
 //Renders an Individual Ingredient
@@ -43,10 +44,12 @@ const IngredientsScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.titleHeader}>
-
+                <Text style={{fontSize: 32}}> Ingredients </Text>
             </View>
             <View style={styles.listView}>
                 <FlatList
+                    contentContainerStyle={styles.grid}
+                    numColumns={2}
                     data={ingredients}
                     renderItem={renderItem}
                     keyExtractor={item => item.name}
@@ -54,13 +57,6 @@ const IngredientsScreen = () => {
             </View>
         </View>
     );
-}
-
-const fetchIngredients = async () => {
-    const firestore = db.firestore();
-    const data = await firestore.collection("Ingredients").get();
-    const ingredients = data.docs.map(doc => doc.data());
-    return ingredients;
 }
 
 const styles = StyleSheet.create({
@@ -75,17 +71,26 @@ const styles = StyleSheet.create({
     },
     listView: {
         backgroundColor: Colours.white,
+        flexDirection: "column",
+        justifyContent: "space-evenly",
         width: '100%',
         height: '85%',
     },
     item: {
-        backgroundColor: '#f9c2ff',
+        backgroundColor: Colours.blue_secondary,
         padding: 20,
         marginVertical: 8,
-        marginHorizontal: 16,
+        marginHorizontal: 10,
+        width: Display.width/2.2,
+        height: Display.width/2.2,
+    },
+    grid: {
+        flex: 1,
+        alignItems: 'center',
     },
     title: {
-        fontSize: 32,
+        fontSize: 16,
+        color: Colours.white,
     },
 });
 
