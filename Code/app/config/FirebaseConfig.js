@@ -18,6 +18,7 @@ const getFirebase = () => {
     } else {
         firebase.app(); //Already initialised
     }
+    firebase.firestore();
     return firebase
 }
 
