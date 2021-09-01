@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const SingleRecipeScreen = () =>  {
     return (
         <View>
-
+            <Text> Single recipe screen </Text>
         </View>
     );
 }

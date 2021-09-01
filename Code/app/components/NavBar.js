@@ -1,23 +1,40 @@
 import React from 'react';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createStackNavigator} from "@react-navigation/stack";
 
 import RecipesScreen from "../screens/RecipesScreen";
 import LikedScreen from "../screens/LikedScreen";
 import GroceriesScreen from "../screens/GroceriesScreen";
 import IngredientsScreen from "../screens/IngredientsScreen";
+import SingleRecipeScreen from "../screens/SingleRecipeScreen";
 import Colours from "../config/Colours";
 
 const Tab = createBottomTabNavigator();
+const RecipeStack = createStackNavigator();
+
+//Stack navigator from Recipes to Single Recipe
+const RecipeStackScreens = () => (
+    <RecipeStack.Navigator initialRouteName={"Recipe"} screenOptions={{headerShown: false}}>
+        <RecipeStack.Screen name={"Recipe"} component={RecipesScreen} />
+        <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
+    </RecipeStack.Navigator>
+);
+
+//Stack navigator from Liked to Single Recipe
+const LikedStackScreens = () => (
+    <RecipeStack.Navigator initialRouteName={"Liked"} screenOptions={{headerShown: false}}>
+        <RecipeStack.Screen name={"Liked"} component={LikedScreen} />
+        <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
+    </RecipeStack.Navigator>
+);
+
 
 const NavBar = () => {
     return (
         <Tab.Navigator
             initialRouteName="Ingredients"
-            screenOptions={{
-                tabBarActiveTintColor: Colours.purple_primary,
-            }}
-        >
+            screenOptions={{headerShown: false}}>
             <Tab.Screen
                 name="Ingredients"
                 component={IngredientsScreen}
@@ -26,65 +43,26 @@ const NavBar = () => {
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="fridge" color={color} size={size} />
                     ),
-                    headerStyle: {
-                        backgroundColor: Colours.purple_primary,
-                        height: '15%',
-                    },
-                    tabBarLabelStyle: {
-                        fontSize: 11
-                    },
-                    headerTitleStyle: {
-                        fontSize: 30
-                    },
-                    headerTitleAlign: 'center',
-                    headerStatusBarHeight: 70,
-                    headerTintColor: Colours.white,
                 }}
             />
             <Tab.Screen
                 name="Recipes"
-                component={RecipesScreen}
+                component={RecipeStackScreens}
                 options={{
                     tabBarLabel: 'Recipes',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="pot-steam" color={color} size={size} />
                     ),
-                    headerStyle: {
-                        backgroundColor: Colours.purple_primary,
-                        height: '15%',
-                    },
-                    tabBarLabelStyle: {
-                        fontSize: 11
-                    },
-                    headerTitleStyle: {
-                        fontSize: 30
-                    },
-                    headerTitleAlign: 'center',
-                    headerStatusBarHeight: 70,
-                    headerTintColor: Colours.white,
                 }}
             />
             <Tab.Screen
                 name="Liked Recipes"
-                component={LikedScreen}
+                component={LikedStackScreens}
                 options={{
                     tabBarLabel: 'Favourites',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="heart" color={color} size={size} />
                     ),
-                    headerStyle: {
-                        backgroundColor: Colours.purple_primary,
-                        height: '15%',
-                    },
-                    tabBarLabelStyle: {
-                        fontSize: 11
-                    },
-                    headerTitleStyle: {
-                        fontSize: 30
-                    },
-                    headerTitleAlign: 'center',
-                    headerStatusBarHeight: 70,
-                    headerTintColor: Colours.white,
                 }}
             />
             <Tab.Screen
@@ -95,19 +73,6 @@ const NavBar = () => {
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="cart" color={color} size={size} />
                     ),
-                    headerStyle: {
-                        backgroundColor: Colours.purple_primary,
-                        height: '15%',
-                    },
-                    tabBarLabelStyle: {
-                        fontSize: 11
-                    },
-                    headerTitleStyle: {
-                        fontSize: 30
-                    },
-                    headerTitleAlign: 'center',
-                    headerStatusBarHeight: 70,
-                    headerTintColor: Colours.white,
                 }}
             />
         </Tab.Navigator>
