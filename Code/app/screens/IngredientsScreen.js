@@ -6,7 +6,7 @@ import Display from "../config/Display";
 import {db} from "../config/FirebaseConfig";
 
 //Renders an Individual Ingredient
-const Item = ({ title }) => (
+const Item = ({ title, image }) => (
     <View style={styles.item}>
         <Text style={styles.title}>{title}</Text>
     </View>
@@ -38,13 +38,13 @@ const IngredientsScreen = () => {
 
     //Lazy renders ingredients
     const renderItem = ({ item }) => (
-        <Item title={item.name} />
+        <Item title={item.name} image={item.image} />
     );
 
     return (
         <View style={styles.container}>
             <View style={styles.titleHeader}>
-                <Text style={{fontSize: 32}}> Ingredients </Text>
+                <Text style={{fontSize: 32}}> Search bar and filters </Text>
             </View>
             <View style={styles.listView}>
                 <FlatList
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         color: Colours.white,
     },
 });
