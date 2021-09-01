@@ -3,10 +3,10 @@ import {StyleSheet, View} from 'react-native';
 
 import Colours from "../config/Colours";
 
-const LockScreen = () => {
+const LoginScreen = () => {
     return (
         <View style={styles.container}>
-
+            <Text> Login Screen</Text>
         </View>
     );
 }
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LockScreen;
+export default LoginScreen;
