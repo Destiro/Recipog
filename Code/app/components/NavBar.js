@@ -8,7 +8,6 @@ import LikedScreen from "../screens/LikedScreen";
 import GroceriesScreen from "../screens/GroceriesScreen";
 import IngredientsScreen from "../screens/IngredientsScreen";
 import SingleRecipeScreen from "../screens/SingleRecipeScreen";
-import Colours from "../config/Colours";
 
 const Tab = createBottomTabNavigator();
 const RecipeStack = createStackNavigator();

@@ -1,12 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 
 import Colours from "../config/Colours";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Text> Login Screen</Text>
+            <Button title={"Press me"} onPress={() => alert("hello")} />
         </View>
     );
 }
