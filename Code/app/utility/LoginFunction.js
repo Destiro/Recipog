@@ -1,15 +1,12 @@
 import React from "react";
+import {db} from "../config/FirebaseConfig";
 
-export default function LoginFunction() {
+const LoginFunction = () => {
     const [loginName, setLoginName] = React.useState(null);
 
-    //Setting login name for retrieval
     function updateLoginName(newLoginName) {
-        if (newLoginName != null) {
-            setLoginName(newLoginName);
-            console.log("I updated loginName: " + newLoginName);
-        }
-        RootStack.navigate('App');
+        setLoginName(newLoginName);
+        console.log("I updated loginName: " + newLoginName);
     }
 
     //Get login name for primary app pages
@@ -17,3 +14,17 @@ export default function LoginFunction() {
         return loginName;
     }
 }
+
+//Setting login name for retrieval
+export function checkLoginName(newLoginName) {
+    const dbRef = db.database().ref();
+    let isValidName = false;
+    if (newLoginName !== '') {
+       // dbRef.get().then(value => {isValidName = (isValidName || value.child(newLoginName).exists())});
+        //setLoginName(newLoginName);
+        console.log("Login name is valid: " + isValidName);
+    }
+    return isValidName;
+}
+
+export default LoginFunction;
