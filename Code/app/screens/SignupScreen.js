@@ -1,15 +1,41 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-
-import Colours from "../config/Colours";
+import {StyleSheet, View, Text, Button, TouchableWithoutFeedback} from 'react-native';
 import {TextInput} from "react-native-paper";
 
-const SignupScreen = () => {
+import Colours from "../config/Colours";
+import {db} from "../config/FirebaseConfig";
+
+const SignupScreen = ({navigation}) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
 
+    const ref = db.firestore().collection("Users");
+
+    //Adds current inputted text as a new entry in firestore
+    function addLogin(username, password) {
+        if (login !== '' && password !== '') {
+            ref.doc(username).set({
+                username: username,
+                password: password,
+                ingredients: [],
+                groceries: []
+            }).then(function () {
+                console.log("User successfully added!");
+            }).catch(function (error) {
+                console.error("Error adding user: ", error)
+            });
+
+            //Route back to login page
+            navigation.navigate("Login");
+        } else {
+            //An empty given
+            alert("Please enter a valid username and password! >:(");
+        }
+    }
+
     return (
         <View style={styles.container}>
+            <View style={styles.headerStyle} />
             <View style={styles.SignupBox}>
                 <Text style={styles.title}> Create Account </Text>
                 <View style={{paddingBottom: 30, backgroundColor: Colours.purple_primary}} />
@@ -27,8 +53,13 @@ const SignupScreen = () => {
                     style={{backgroundColor: Colours.white}}
                 />
                 <View style={{paddingBottom: 30, backgroundColor: Colours.purple_primary}} />
-                <Button title={"Create Account"} style={styles.button} onPress={() => alert(login+" : "+password)}  />
+                <Button title={"Create Account"} style={styles.button} onPress={() => addLogin(login, password)}  />
             </View>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Login")}>
+                <View style={styles.signUpFooter}>
+                    <Text style={styles.signUpText}> Opps! I have an Account.</Text>
+                </View>
+            </TouchableWithoutFeedback>
         </View>
     );
 }
@@ -40,19 +71,37 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: Colours.purple_primary,
     },
+    headerStyle: {
+        backgroundColor: Colours.purple_primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80%',
+        height: '19%',
+    },
     title: {
         fontSize: 45,
         color: Colours.white,
     },
     SignupBox: {
         width: '80%',
-        height: '50%',
+        height: '60%',
         backgroundColor: Colours.purple_primary,
     },
     button: {
         width: '70%',
         backgroundColor: Colours.blue_primary,
         height: 30,
+    },
+    signUpFooter: {
+        width: '80%',
+        height: '10%',
+        alignItems: 'center',
+        backgroundColor: Colours.purple_primary,
+        justifyContent: 'center',
+    },
+    signUpText: {
+        fontSize: 18,
+        color: Colours.light_grey,
     },
 });
 
