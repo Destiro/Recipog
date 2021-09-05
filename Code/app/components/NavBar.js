@@ -29,7 +29,7 @@ const LikedStackScreens = () => (
 );
 
 
-const NavBar = () => {
+const NavBar = ({navigation}) => {
     return (
         <Tab.Navigator
             initialRouteName="Ingredients"

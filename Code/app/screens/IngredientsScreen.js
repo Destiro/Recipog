@@ -4,6 +4,7 @@ import {StyleSheet, View, Text, FlatList, Image, TouchableWithoutFeedback} from 
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 import {db} from "../config/FirebaseConfig";
+import Header from "../components/Header";
 
 //Renders an Individual Ingredient
 const Item = ({ title, image }) => (
@@ -53,7 +54,8 @@ const IngredientsScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.titleHeader}>
+            <Header title={"My Pantry"} />
+            <View style={styles.searchBox}>
                 <Text style={{fontSize: 32}}> Search bar and filters </Text>
             </View>
             <View style={styles.listView}>
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    titleHeader: {
+    searchBox: {
         backgroundColor: Colours.light_grey,
         width: '100%',
         height: '15%',
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-evenly",
         width: '100%',
-        height: '85%',
+        height: '75%',
     },
     item: {
         backgroundColor: Colours.blue_primary,
