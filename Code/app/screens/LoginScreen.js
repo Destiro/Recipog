@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, View, Text, Button, TouchableWithoutFeedback} from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import Colours from "../config/Colours";
@@ -67,6 +67,12 @@ const LoginScreen = ({navigation}) => {
                 <View style={{paddingBottom: 30, backgroundColor: Colours.purple_primary}} />
                 <Button title={"Login"} style={styles.button} onPress={() => checkLogin(login,password)}  />
             </View>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Signup")}>
+                <View style={styles.signUpFooter}>
+                    <Text style={styles.signUpText}> Dont have an account?</Text>
+                    <Text style={styles.signUpText2}> Sign up </Text>
+                </View>
+            </TouchableWithoutFeedback>
         </View>
     );
 }
@@ -90,13 +96,28 @@ const styles = StyleSheet.create({
     },
     loginBox: {
         width: '80%',
-        height: '40%',
+        height: '50%',
         backgroundColor: Colours.purple_primary,
     },
     button: {
         width: '70%',
         backgroundColor: Colours.blue_primary,
         height: 30,
+    },
+    signUpFooter: {
+        width: '80%',
+        height: '10%',
+        alignItems: 'center',
+        backgroundColor: Colours.purple_primary,
+        justifyContent: 'center',
+    },
+    signUpText: {
+        fontSize: 18,
+        color: Colours.light_grey,
+    },
+    signUpText2: {
+        fontSize: 18,
+        color: Colours.white,
     }
 });
 
