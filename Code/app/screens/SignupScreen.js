@@ -18,7 +18,8 @@ const SignupScreen = ({navigation}) => {
                 username: username,
                 password: password,
                 ingredients: [],
-                groceries: []
+                groceries: [],
+                favourites: []
             }).then(function () {
                 console.log("User successfully added!");
             }).catch(function (error) {

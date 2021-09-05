@@ -1,15 +1,16 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import Env from "./EnvironmentVariables";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCEPkD5mnzpfOJCMDKVHC8GXGWqzeglCzo",
-    authDomain: "recipog.firebaseapp.com",
-    databaseURL: "https://recipog-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "recipog",
-    storageBucket: "recipog.appspot.com",
-    messagingSenderId: "688039776763",
-    appId: "1:688039776763:web:0c4f1ee3c3906064b73b5e",
-    measurementId: "G-T7YV44E4QH"
+    apiKey: Env.apiKey,
+    authDomain: Env.authDomain,
+    databaseURL: Env.databaseURL,
+    projectId: Env.projectId,
+    storageBucket: Env.storageBucket,
+    messagingSenderId: Env.messagingSenderId,
+    appId: Env.appId,
+    measurementId: Env.measurementId
 };
 
 const getFirebase = () => {
