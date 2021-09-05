@@ -1,16 +1,48 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import Colours from "../config/Colours";
-import LoginFunction, {checkLoginName} from "../utility/LoginFunction";
+import {db} from "../config/FirebaseConfig";
 
 const LoginScreen = ({navigation}) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
 
+    const [users, setUsers] = useState([]);
+    const ref = db.firestore().collection("Users");
+
+    //Loads data from firestore
+    function getUsers() {
+        ref.onSnapshot((querySnapshot) => {
+            const users = [];
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data());
+            });
+            setUsers(users);
+        })
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+    //Checks if this is a valid user, then navigates to ingredients page if valid
     function checkLogin(login, password){
-        checkLoginName(login, password);
+        let isValidName = false;
+        if (login !== '' && password !== '') {
+            for(let i=0; i<users.length; i++){
+                if(users[i].username === login && users[i].password === password){
+                    isValidName = true;
+                }
+            }
+        }
+
+        if(!isValidName){
+            alert("Incorrect user or pass! >:(");
+        }else{
+            navigation.navigate("App", { username: login })
+        }
     }
 
     return (

@@ -6,11 +6,9 @@ import NavBar from "./app/components/NavBar";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 
-import LoginFunction from "./app/utility/LoginFunction";
-
 const RootStack = createStackNavigator();
 
-const App = () => {
+const App = ({navigation}) => {
 
     return (
         <NavigationContainer>
