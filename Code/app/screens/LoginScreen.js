@@ -61,6 +61,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     label="Password"
                     value={password}
+                    secureTextEntry={true}
                     onChangeText={text => setPassword(text)}
                     style={{backgroundColor: Colours.white}}
                 />
