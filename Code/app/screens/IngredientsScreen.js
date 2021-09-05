@@ -23,7 +23,7 @@ function toggleHighlight(title){
     console.log(title)
 }
 
-const IngredientsScreen = () => {
+const IngredientsScreen = (props) => {
     //Firestore variables
     const [ingredients, setIngredients] = useState([]);
     const [loading, setLoading] = useState(false);

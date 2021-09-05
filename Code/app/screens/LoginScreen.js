@@ -41,7 +41,7 @@ const LoginScreen = ({navigation}) => {
         if(!isValidName){
             alert("Incorrect user or pass! >:(");
         }else{
-            navigation.navigate("App", { username: login })
+            navigation.navigate("App", { login: login })
         }
     }
 

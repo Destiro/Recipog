@@ -2,7 +2,7 @@ import React from 'react';
 import Colours from "../config/Colours";
 import { StyleSheet, Text, View } from 'react-native';
 
-const SingleRecipeScreen = () =>  {
+const SingleRecipeScreen = (props) =>  {
     return (
         <View>
             <Text> Single recipe screen </Text>

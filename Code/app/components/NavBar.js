@@ -13,30 +13,30 @@ const Tab = createBottomTabNavigator();
 const RecipeStack = createStackNavigator();
 
 //Stack navigator from Recipes to Single Recipe
-const RecipeStackScreens = () => (
+const RecipeStackScreens = (props) => (
     <RecipeStack.Navigator initialRouteName={"Recipe"} screenOptions={{headerShown: false}}>
-        <RecipeStack.Screen name={"Recipe"} component={RecipesScreen} />
+        <RecipeStack.Screen name={"Recipe"} children={()=><RecipesScreen login={props.login}/>}/>
         <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
     </RecipeStack.Navigator>
 );
 
 //Stack navigator from Liked to Single Recipe
-const LikedStackScreens = () => (
+const LikedStackScreens = (props) => (
     <RecipeStack.Navigator initialRouteName={"Liked"} screenOptions={{headerShown: false}}>
-        <RecipeStack.Screen name={"Liked"} component={LikedScreen} />
+        <RecipeStack.Screen name={"Liked"} children={()=><LikedScreen login={props.login}/>}/>
         <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
     </RecipeStack.Navigator>
 );
 
 
-const NavBar = ({navigation}) => {
+const NavBar = ({route}) => {
     return (
         <Tab.Navigator
             initialRouteName="Ingredients"
             screenOptions={{headerShown: false}}>
             <Tab.Screen
                 name="Ingredients"
-                component={IngredientsScreen}
+                children={()=><IngredientsScreen login={route.params.login}/>}
                 options={{
                     tabBarLabel: 'My Pantry',
                     tabBarIcon: ({ color, size }) => (
@@ -46,7 +46,7 @@ const NavBar = ({navigation}) => {
             />
             <Tab.Screen
                 name="Recipes"
-                component={RecipeStackScreens}
+                children={()=><RecipeStackScreens login={route.params.login}/>}
                 options={{
                     tabBarLabel: 'Recipes',
                     tabBarIcon: ({ color, size }) => (
@@ -56,7 +56,7 @@ const NavBar = ({navigation}) => {
             />
             <Tab.Screen
                 name="Liked Recipes"
-                component={LikedStackScreens}
+                children={()=><LikedStackScreens login={route.params.login}/>}
                 options={{
                     tabBarLabel: 'Favourites',
                     tabBarIcon: ({ color, size }) => (
@@ -66,7 +66,7 @@ const NavBar = ({navigation}) => {
             />
             <Tab.Screen
                 name="Grocery List"
-                component={GroceriesScreen}
+                children={()=><GroceriesScreen login={route.params.login}/>}
                 options={{
                     tabBarLabel: 'Groceries',
                     tabBarIcon: ({ color, size }) => (
