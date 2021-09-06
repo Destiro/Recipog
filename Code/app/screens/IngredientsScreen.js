@@ -8,6 +8,8 @@ import Header from "../components/Header";
 import IngredientItem from "../components/IngredientItem";
 import SaveFAB from "../components/SaveFAB";
 import ClearFAB from "../components/ClearFAB";
+import SearchBar from "../components/SearchBar";
+import DropDownFilter from "../components/DropDownFilter";
 
 const IngredientsScreen = (props) => {
     //Firestore variables
@@ -106,7 +108,9 @@ const IngredientsScreen = (props) => {
         <View style={styles.container}>
             <Header title={"My Pantry"} />
             <View style={styles.searchBox}>
-                <Text style={{fontSize: 32}}> Search bar and filters </Text>
+                <SearchBar />
+                <View style={{height: '10%'}} />
+                <DropDownFilter />
             </View>
             <View style={styles.listView}>
                 <FlatList
@@ -129,7 +133,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     searchBox: {
-        backgroundColor: Colours.light_grey,
+        backgroundColor: Colours.white,
+        alignItems: 'center',
         width: '100%',
         height: '15%',
     },
