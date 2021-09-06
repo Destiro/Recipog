@@ -58,7 +58,7 @@ const SignupScreen = ({navigation}) => {
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate("Login")}>
                 <View style={styles.signUpFooter}>
-                    <Text style={styles.signUpText}> Opps! I have an Account.</Text>
+                    <Text style={styles.signUpText}> Oops! I have an Account.</Text>
                 </View>
             </TouchableWithoutFeedback>
         </View>

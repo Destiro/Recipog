@@ -12,7 +12,7 @@ const App = ({navigation}) => {
 
     return (
         <NavigationContainer>
-            <RootStack.Navigator headerMode={"none"} initialRouteName={"Login"}>
+            <RootStack.Navigator initialRouteName={"Login"} screenOptions={{headerShown: false}}>
                 <RootStack.Screen name={"App"}
                                   component={NavBar}
                 />
