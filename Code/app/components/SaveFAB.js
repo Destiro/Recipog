@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import Colours from "../config/Colours";
 
-const SaveFAB = () => (
+const SaveFAB = ({saveHandler}) => (
     <FAB
         style={styles.fab}
         large
         label={"Save"}
         icon="content-save"
-        onPress={() => console.log('Pressed')}
+        onPress={() => saveHandler()}
     />
 );
 

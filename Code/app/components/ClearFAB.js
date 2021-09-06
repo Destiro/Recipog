@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import Colours from "../config/Colours";
 
-const ClearFAB = () => (
+const ClearFAB = ({clearHandler}) => (
     <FAB
         style={styles.fab}
         large
         label={"Clear"}
         icon="close-circle-outline"
-        onPress={() => console.log('Pressed2')}
+        onPress={() => clearHandler()}
     />
 );
 
