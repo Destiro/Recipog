@@ -3,17 +3,27 @@ import Colours from "../config/Colours";
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Header from "../components/Header";
 import GroceryItem from "../components/GroceryItem";
+import AddGrocery from "../components/AddGrocery";
 
 const GroceriesScreen = (props) =>  {
     const [groceries, setGroceries] = useState([
-        {text: 'coffee', key: 'coffee'},
-        {text: 'cupcakes', key: 'cupcakes'},
-        {text: 'chocolate', key: 'chocolate'}
+        {text: 'coffee', key: '1'},
+        {text: 'cupcakes', key: '2'},
+        {text: 'chocolate', key: '3'}
     ]);
 
     const pressHandler = (key) => {
         setGroceries((prevGroceries) => {
-            return prevGroceries.filter(groceries => groceries.key != key)
+            return prevGroceries.filter(groceries => groceries.key !== key)
+        })
+    }
+
+    const submitHandler = (text) => {
+        setGroceries((prevGroceries) => {
+            return [
+                {text: text, key: text+Math.random().toString() },
+                ...prevGroceries
+            ]
         })
     }
 
@@ -21,7 +31,8 @@ const GroceriesScreen = (props) =>  {
         <View style={styles.container}>
             <Header title={"Groceries"} />
             <View style={styles.contentBox}>
-                <View style={styles.list}>
+                <AddGrocery submitHandler={submitHandler} />
+                <View style={styles.list} >
                     <FlatList data={groceries}
                               renderItem={({ item }) => (
                                   <GroceryItem item={item} pressHandler={pressHandler}/>
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: Colours.light_grey,
+        backgroundColor: Colours.white,
     },
     contentBox: {
         width: '80%',
