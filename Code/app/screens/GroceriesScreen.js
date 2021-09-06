@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import GroceryItem from "../components/GroceryItem";
 import AddGrocery from "../components/AddGrocery";
 import SaveFAB from "../components/SaveFAB";
+import ClearFAB from "../components/ClearFAB";
 
 const GroceriesScreen = (props) =>  {
     const [groceries, setGroceries] = useState([
@@ -41,6 +42,7 @@ const GroceriesScreen = (props) =>  {
                 </View>
             </View>
             <SaveFAB />
+            <ClearFAB />
         </View>
     );
 }
