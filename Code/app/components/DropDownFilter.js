@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { Picker, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import {Picker} from '@react-native-picker/picker';
+
 
 const DropDownFilter = () => {
-    const [selectedValue, setSelectedValue] = useState("All Categories");
+    const [category, setCategory] = useState("All Categories");
+
 
     return (
         <Picker
-            selectedValue={selectedValue}
             style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
+            selectedValue={category}
+            mode="dropdown"
+            onValueChange={(itemValue, itemIndex) =>
+                setCategory(itemValue)
+            }>
             <Picker.Item label="All Categories" value="All Categories" />
             <Picker.Item label="Essentials" value="Essentials" />
             <Picker.Item label="Savoury" value="Savoury" />
