@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import {db} from "../config/FirebaseConfig";
 import IngredientItem from "../components/IngredientItem";
 import SearchBar from "../components/SearchBar";
-import DropDownFilter from "../components/DropDownFilter";
+import IngredientsFilter from "../components/IngredientsFilter";
 import RecipeItem from "../components/RecipeItem";
 
 const RecipesScreen = (props) =>  {
@@ -66,8 +66,8 @@ const RecipesScreen = (props) =>  {
             <Header title={"Recipes"} />
             <View style={styles.searchBox}>
                 <SearchBar />
-                <View style={{height: '10%'}} />
-                <DropDownFilter />
+                <View style={{height: '5%'}} />
+                <IngredientsFilter />
             </View>
             <View style={styles.listView}>
                 <FlatList

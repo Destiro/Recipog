@@ -9,13 +9,16 @@ import IngredientItem from "../components/IngredientItem";
 import SaveFAB from "../components/SaveFAB";
 import ClearFAB from "../components/ClearFAB";
 import SearchBar from "../components/SearchBar";
-import DropDownFilter from "../components/DropDownFilter";
+import IngredientsFilter from "../components/IngredientsFilter";
+import QueryFilter from "../utility/QueryFilter";
 
 const IngredientsScreen = (props) => {
     //Firestore variables
     const [ingredients, setIngredients] = useState([]);
     const [userIngredients, setUserIngredients] = useState([]);
+    const [filterIngredients, setFilterIngredients] = useState([]);
     const [user, setUser] = useState(null);
+    const [retrievedIngreds, setRetrievedIngreds] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const ref = db.firestore().collection("Ingredients");
@@ -29,29 +32,34 @@ const IngredientsScreen = (props) => {
                 items.push(doc.data());
             });
             setIngredients(items);
+            setFilterIngredients(items);
             setLoading(true);
         })
     }
 
+    const fetchUser = async() => {
+        try{
+            const response = await userRef.doc(props.login).get();
+            if(response.exists){
+
+                if(user === null) {
+                    setUserIngredients(response.data().ingredients);
+                }
+                setUser(response.data());
+                setLoading(true);
+            }
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
     //Loads user data from firestore
     useEffect(() => {
-        const fetchUser = async() => {
-            try{
-                const response = await userRef.doc(props.login).get();
-                if(response.exists){
-
-                    if(user === null) {
-                        setUserIngredients(response.data().ingredients);
-                    }
-                    setUser(response.data());
-                    setLoading(true);
-                }
-            } catch(err) {
-                console.error(err);
-            }
+        if(!retrievedIngreds){
+            fetchUser();
+            getIngredients();
+            setRetrievedIngreds(true);
         }
-        fetchUser();
-        getIngredients();
     }, [loading])
 
     //User taps on an ingredient functionality
@@ -94,6 +102,13 @@ const IngredientsScreen = (props) => {
         setLoading(false);
     }
 
+    const filterHandler = (filter) => {
+        if(ingredients !== []){
+            setFilterIngredients(QueryFilter(ingredients, filter, true))
+            setLoading(false);
+        }
+    }
+
     //Lazy renders ingredients
     const renderItem = ({ item }) => (
         <IngredientItem
@@ -109,14 +124,14 @@ const IngredientsScreen = (props) => {
             <Header title={"My Pantry"} />
             <View style={styles.searchBox}>
                 <SearchBar />
-                <View style={{height: '10%'}} />
-                <DropDownFilter />
+                <View style={{height: '5%'}} />
+                <IngredientsFilter filterHandler={filterHandler}/>
             </View>
             <View style={styles.listView}>
                 <FlatList
                     contentContainerStyle={styles.grid}
                     numColumns={2}
-                    data={ingredients}
+                    data={filterIngredients}
                     renderItem={renderItem}
                     keyExtractor={item => item.name}
                 />

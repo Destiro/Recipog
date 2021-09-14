@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: Display.width/2.2,
         height: Display.width/2.2,
+        borderRadius: 10,
     },
     item2: {
         backgroundColor: Colours.dark_grey,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: Display.width/2.2,
         height: Display.width/2.2,
+        borderRadius: 10,
     },
 });
 
