@@ -35,7 +35,7 @@ const IngredientsScreen = (props) => {
             });
             setIngredients(items);
             setFilterIngredients(items);
-            setLoading(true);
+            console.log("1")
         })
     }
 
@@ -48,7 +48,7 @@ const IngredientsScreen = (props) => {
                     setUserIngredients(response.data().ingredients);
                 }
                 setUser(response.data());
-                setLoading(true);
+                console.log("2")
             }
         } catch(err) {
             console.error(err);
@@ -57,21 +57,19 @@ const IngredientsScreen = (props) => {
 
     //Loads user data from firestore
     useEffect(() => {
-        if(!retrievedIngreds){
-            fetchUser();
-            getIngredients();
-            setRetrievedIngreds(true);
-        }
-        console.log("reloaded");
+
     }, [loading])
 
     //User taps on an ingredient functionality
     const touchHandler = (title) => {
         //User doesnt have ingredient => add
+        console.log(title+" touched");
         if(!userIngredients.includes(title)) {
-            let newUserIngredients = userIngredients;
-            newUserIngredients.push(title);
-            setUserIngredients(newUserIngredients);
+            let newList = [title];
+            for(let i=0; i<userIngredients.length; i++){
+                newList.push(userIngredients[i])
+            }
+            setUserIngredients(newList);
 
         //User has ingredient => remove
         }else{
@@ -79,9 +77,10 @@ const IngredientsScreen = (props) => {
                 return prevIngredients.filter(ingred => ingred !== title)
             })
         }
+        console.log("user ingreds: "+userIngredients);
 
         //Force a render
-        setLoading(false);
+        setLoading(!loading);
     }
 
     //Saves ingredients to firebase
@@ -102,21 +101,21 @@ const IngredientsScreen = (props) => {
     //Clears the user ingredients list
     const clearHandler = () => {
         setUserIngredients([]);
-        setLoading(false);
+        setLoading(!loading);
     }
 
     const filterHandler = (filter) => {
         if(ingredients !== []){
             setFilterIngredients(QueryFilter(ingredients, filter, true))
             if(search !== ""){ searchHandler(search) }
-            else{ setLoading(false); }
+            else{ setLoading(!loading); }
         }
     }
 
     const searchHandler = (newSearch) => {
         setSearch(newSearch);
         setFilterIngredients(QuerySearch(ingredients, newSearch));
-        setLoading(false);
+        setLoading(!loading);
     }
 
     //Lazy renders ingredients
@@ -128,6 +127,13 @@ const IngredientsScreen = (props) => {
             selected={userIngredients.includes(item.name)}
         />
     );
+
+    //Loads user and ingredient data
+    if(!retrievedIngreds){
+        fetchUser();
+        getIngredients();
+        setRetrievedIngreds(true);
+    }
 
     return (
         <View style={styles.container}>
@@ -141,8 +147,8 @@ const IngredientsScreen = (props) => {
                 <FlatList
                     contentContainerStyle={styles.grid}
                     numColumns={2}
-                    initialNumToRender={8}
                     data={filterIngredients}
+                    extraData={loading}
                     renderItem={renderItem}
                     keyExtractor={item => item.name}
                 />

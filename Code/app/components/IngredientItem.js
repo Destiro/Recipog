@@ -1,20 +1,24 @@
 //Renders an Individual Ingredient
 import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
-import React from "react";
+import React, { PureComponent } from 'react';
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 
-const IngredientItem = ({ title, image, touchHandler, selected }) => (
-    <TouchableWithoutFeedback onPress={() => touchHandler(title)}>
-        <View style={selected ? styles.item : styles.item2}>
+class IngredientItem extends PureComponent {
+    render () {
+        return (
+        <TouchableWithoutFeedback onPress={() => this.props.touchHandler(this.props.title)}>
+            <View style={this.props.selected ? styles.item : styles.item2}>
 
-            <Image style={{width: '100%', height: '90%', paddingTop: 10}}
-                   source={require('../assets/images/'+image)} />
-            <Text style={styles.title}>{title}</Text>
+                <Image style={{width: '100%', height: '90%', paddingTop: 10}}
+                       source={require('../assets/images/'+this.props.image)} />
+                <Text style={styles.title}>{this.props.title}</Text>
 
-        </View>
-    </TouchableWithoutFeedback>
-);
+            </View>
+        </TouchableWithoutFeedback>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     title: {
