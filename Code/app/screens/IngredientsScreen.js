@@ -11,15 +11,17 @@ import ClearFAB from "../components/ClearFAB";
 import SearchBar from "../components/SearchBar";
 import IngredientsFilter from "../components/IngredientsFilter";
 import QueryFilter from "../utility/QueryFilter";
+import QuerySearch from "../utility/QuerySearch";
 
 const IngredientsScreen = (props) => {
-    //Firestore variables
+    //Wall of state variables :(((((((
     const [ingredients, setIngredients] = useState([]);
     const [userIngredients, setUserIngredients] = useState([]);
     const [filterIngredients, setFilterIngredients] = useState([]);
     const [user, setUser] = useState(null);
     const [retrievedIngreds, setRetrievedIngreds] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState("");
 
     const ref = db.firestore().collection("Ingredients");
     const userRef = db.firestore().collection("Users");
@@ -60,6 +62,7 @@ const IngredientsScreen = (props) => {
             getIngredients();
             setRetrievedIngreds(true);
         }
+        console.log("reloaded");
     }, [loading])
 
     //User taps on an ingredient functionality
@@ -105,8 +108,15 @@ const IngredientsScreen = (props) => {
     const filterHandler = (filter) => {
         if(ingredients !== []){
             setFilterIngredients(QueryFilter(ingredients, filter, true))
-            setLoading(false);
+            if(search !== ""){ searchHandler(search) }
+            else{ setLoading(false); }
         }
+    }
+
+    const searchHandler = (newSearch) => {
+        setSearch(newSearch);
+        setFilterIngredients(QuerySearch(ingredients, newSearch));
+        setLoading(false);
     }
 
     //Lazy renders ingredients
@@ -123,7 +133,7 @@ const IngredientsScreen = (props) => {
         <View style={styles.container}>
             <Header title={"My Pantry"} />
             <View style={styles.searchBox}>
-                <SearchBar />
+                <SearchBar searchHandler={searchHandler} />
                 <View style={{height: '5%'}} />
                 <IngredientsFilter filterHandler={filterHandler}/>
             </View>
@@ -131,6 +141,7 @@ const IngredientsScreen = (props) => {
                 <FlatList
                     contentContainerStyle={styles.grid}
                     numColumns={2}
+                    initialNumToRender={8}
                     data={filterIngredients}
                     renderItem={renderItem}
                     keyExtractor={item => item.name}
