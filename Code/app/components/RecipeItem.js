@@ -4,9 +4,11 @@ import React from "react";
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 
-const IngredientItem = ({ title, diff, time }) => (
+const RecipeItem = ({ title, diff, time, image }) => (
     <TouchableWithoutFeedback onPress={() => console.log(title+" touched.")}>
         <View style={styles.item}>
+            <Image style={{width: '100%', height: '90%', paddingTop: 10}}
+                   source={require('../assets/recipe_images/'+image)} />
             <View style={styles.bottomBar}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.descText}>Difficulty: {diff}    Time: {time}</Text>
@@ -44,4 +46,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default IngredientItem;
+export default RecipeItem;

@@ -3,7 +3,6 @@ import Colours from "../config/Colours";
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Header from "../components/Header";
 import {db} from "../config/FirebaseConfig";
-import IngredientItem from "../components/IngredientItem";
 import SearchBar from "../components/SearchBar";
 import IngredientsFilter from "../components/IngredientsFilter";
 import RecipeItem from "../components/RecipeItem";
@@ -58,6 +57,7 @@ const RecipesScreen = (props) =>  {
             title={item.Name}
             diff={item.Difficulty}
             time={item.Time}
+            image={item.image}
         />
     );
 

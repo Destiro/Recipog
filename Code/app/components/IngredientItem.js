@@ -11,7 +11,7 @@ class IngredientItem extends PureComponent {
             <View style={this.props.selected ? styles.item : styles.item2}>
 
                 <Image style={{width: '100%', height: '90%', paddingTop: 10}}
-                       source={require('../assets/images/'+this.props.image)} />
+                       source={require('../assets/ingredient_images/'+this.props.image)} />
                 <Text style={styles.title}>{this.props.title}</Text>
 
             </View>
