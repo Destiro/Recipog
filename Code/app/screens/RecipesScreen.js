@@ -6,12 +6,14 @@ import {db} from "../config/FirebaseConfig";
 import SearchBar from "../components/SearchBar";
 import IngredientsFilter from "../components/IngredientsFilter";
 import RecipeItem from "../components/RecipeItem";
+import FindRecipes from "../utility/FindRecipes";
 
 const RecipesScreen = (props) =>  {
     //Firestore variables
     const [recipes, setRecipes] = useState([]);
     const [displayRecipes, setDisplayRecipes] = useState([]);
     const [userIngredients, setUserIngredients] = useState([]);
+    const [retrievedRecipes, setRetrievedRecipes] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -19,36 +21,32 @@ const RecipesScreen = (props) =>  {
     const userRef = db.firestore().collection("Users");
 
     //Loads data from firestore
-    function getRecipes() {
-        ref.onSnapshot((querySnapshot) => {
+    async function getRecipes() {
+        await ref.onSnapshot((querySnapshot) => {
             const items = [];
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
             setRecipes(items);
-            setLoading(true);
+            fetchUser(items)
+        })
+    }
+
+    async function fetchUser(parsedRecipes) {
+        await userRef.onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if(doc.data().username === props.login){
+                    setUserIngredients(doc.data().ingredients)
+                    setUser(doc.data())
+                    setDisplayRecipes(FindRecipes(parsedRecipes, doc.data().ingredients));
+                }
+            });
         })
     }
 
     //Loads user data from firestore
     useEffect(() => {
-        const fetchUser = async() => {
-            try{
-                const response = await userRef.doc(props.login).get();
-                if(response.exists){
-
-                    if(user === null) {
-                        setUserIngredients(response.data().ingredients);
-                    }
-                    setUser(response.data());
-                    setLoading(true);
-                }
-            } catch(err) {
-                console.error(err);
-            }
-        }
-        fetchUser();
-        getRecipes();
+        setDisplayRecipes(FindRecipes(recipes, userIngredients));
     }, [loading])
 
     //Lazy renders ingredients
@@ -60,6 +58,13 @@ const RecipesScreen = (props) =>  {
             image={item.image}
         />
     );
+
+    //Loads user and ingredient data
+    if(!retrievedRecipes){
+        getRecipes();
+        setRetrievedRecipes(true);
+        setLoading(!loading);
+    }
 
     return (
         <View style={styles.container}>
@@ -73,7 +78,7 @@ const RecipesScreen = (props) =>  {
                 <FlatList
                     contentContainerStyle={styles.grid}
                     numColumns={1}
-                    data={recipes}
+                    data={displayRecipes}
                     renderItem={renderItem}
                     keyExtractor={item => item.Name}
                 />

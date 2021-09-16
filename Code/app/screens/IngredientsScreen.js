@@ -35,7 +35,6 @@ const IngredientsScreen = (props) => {
             });
             setIngredients(items);
             setFilterIngredients(items);
-            console.log("1")
         })
     }
 
@@ -48,7 +47,6 @@ const IngredientsScreen = (props) => {
                     setUserIngredients(response.data().ingredients);
                 }
                 setUser(response.data());
-                console.log("2")
             }
         } catch(err) {
             console.error(err);
@@ -63,7 +61,6 @@ const IngredientsScreen = (props) => {
     //User taps on an ingredient functionality
     const touchHandler = (title) => {
         //User doesnt have ingredient => add
-        console.log(title+" touched");
         if(!userIngredients.includes(title)) {
             let newList = [title];
             for(let i=0; i<userIngredients.length; i++){
@@ -77,7 +74,6 @@ const IngredientsScreen = (props) => {
                 return prevIngredients.filter(ingred => ingred !== title)
             })
         }
-        console.log("user ingreds: "+userIngredients);
 
         //Force a render
         setLoading(!loading);
