@@ -4,9 +4,11 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Header from "../components/Header";
 import {db} from "../config/FirebaseConfig";
 import SearchBar from "../components/SearchBar";
-import IngredientsFilter from "../components/IngredientsFilter";
 import RecipeItem from "../components/RecipeItem";
 import FindRecipes from "../utility/FindRecipes";
+import QueryFilter from "../utility/QueryFilter";
+import QuerySearch from "../utility/QuerySearch";
+import RecipeFilter from "../components/RecipeFilter";
 
 const RecipesScreen = (props) =>  {
     //Firestore variables
@@ -16,6 +18,7 @@ const RecipesScreen = (props) =>  {
     const [retrievedRecipes, setRetrievedRecipes] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState("");
 
     const ref = db.firestore().collection("recipes");
     const userRef = db.firestore().collection("Users");
@@ -46,7 +49,7 @@ const RecipesScreen = (props) =>  {
 
     //Loads user data from firestore
     useEffect(() => {
-        setDisplayRecipes(FindRecipes(recipes, userIngredients));
+        //setDisplayRecipes(FindRecipes(recipes, userIngredients));
     }, [loading])
 
     //Lazy renders ingredients
@@ -59,6 +62,20 @@ const RecipesScreen = (props) =>  {
         />
     );
 
+    const filterHandler = (filter) => {
+        if(recipes !== []){
+            setDisplayRecipes(QueryFilter(recipes, filter, false))
+            if(search !== ""){ searchHandler(search) }
+            else{ setLoading(!loading); }
+        }
+    }
+
+    const searchHandler = (newSearch) => {
+        setSearch(newSearch);
+        setDisplayRecipes(QuerySearch(recipes, newSearch));
+        setLoading(!loading);
+    }
+
     //Loads user and ingredient data
     if(!retrievedRecipes){
         getRecipes();
@@ -70,9 +87,9 @@ const RecipesScreen = (props) =>  {
         <View style={styles.container}>
             <Header title={"Recipes"} />
             <View style={styles.searchBox}>
-                <SearchBar />
+                <SearchBar searchHandler={searchHandler}/>
                 <View style={{height: '5%'}} />
-                <IngredientsFilter />
+                <RecipeFilter filterHandler={filterHandler} />
             </View>
             <View style={styles.listView}>
                 <FlatList
