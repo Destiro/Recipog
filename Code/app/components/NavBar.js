@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
 
 import RecipesScreen from "../screens/RecipesScreen";
-import LikedScreen from "../screens/LikedScreen";
+import MealPlannerScreen from "../screens/MealPlannerScreen";
 import GroceriesScreen from "../screens/GroceriesScreen";
 import IngredientsScreen from "../screens/IngredientsScreen";
 import SingleRecipeScreen from "../screens/SingleRecipeScreen";
@@ -23,7 +23,7 @@ const RecipeStackScreens = (props) => (
 //Stack navigator from Liked to Single Recipe
 const LikedStackScreens = (props) => (
     <RecipeStack.Navigator initialRouteName={"Liked"} screenOptions={{headerShown: false}}>
-        <RecipeStack.Screen name={"Liked"} children={()=><LikedScreen login={props.login}/>}/>
+        <RecipeStack.Screen name={"Liked"} children={()=><MealPlannerScreen login={props.login}/>}/>
         <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
     </RecipeStack.Navigator>
 );
@@ -58,9 +58,9 @@ const NavBar = ({route}) => {
                 name="Liked Recipes"
                 children={()=><LikedStackScreens login={route.params.login}/>}
                 options={{
-                    tabBarLabel: 'Favourites',
+                    tabBarLabel: 'Meal Planner',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="heart" color={color} size={size} />
+                        <MaterialCommunityIcons name="hamburger" color={color} size={size} />
                     ),
                 }}
             />

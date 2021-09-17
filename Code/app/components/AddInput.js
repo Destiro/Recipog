@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {StyleSheet, TextInput, Button, View} from "react-native";
 import Colours from "../config/Colours";
 
-export default function AddGrocery( {submitHandler} ) {
+export default function AddInput({pText, submitHandler, buttonText} ) {
     const [text, setText] = useState('')
 
     const changeHandler = (val) => {
@@ -13,10 +13,10 @@ export default function AddGrocery( {submitHandler} ) {
         <View style={styles.addBar}>
             <TextInput
                 style={styles.input}
-                placeholder={"A Grocery Item..."}
+                placeholder={pText}
                 onChangeText={changeHandler}
                 />
-                <Button title={"Add Grocery Item"} onPress={() => submitHandler(text)} style={styles.button} />
+                <Button title={buttonText} onPress={() => submitHandler(text)} style={styles.button} />
         </View>
     )
 }

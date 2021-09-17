@@ -3,7 +3,7 @@ import Colours from "../config/Colours";
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Header from "../components/Header";
 import GroceryItem from "../components/GroceryItem";
-import AddGrocery from "../components/AddGrocery";
+import AddInput from "../components/AddInput";
 import SaveFAB from "../components/SaveFAB";
 import ClearFAB from "../components/ClearFAB";
 import {db} from "../config/FirebaseConfig";
@@ -75,7 +75,7 @@ const GroceriesScreen = (props) =>  {
         <View style={styles.container}>
             <Header title={"Groceries"} />
             <View style={styles.contentBox}>
-                <AddGrocery submitHandler={submitHandler} />
+                <AddInput pText={"A Grocery Item..."} buttonText={"Add Grocery Item"} submitHandler={submitHandler} />
                 <View style={styles.list} >
                     <FlatList data={groceries}
                               renderItem={({ item }) => (

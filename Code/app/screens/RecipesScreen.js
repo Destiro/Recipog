@@ -16,7 +16,6 @@ const RecipesScreen = (props) =>  {
     const [displayRecipes, setDisplayRecipes] = useState([]);
     const [userIngredients, setUserIngredients] = useState([]);
     const [retrievedRecipes, setRetrievedRecipes] = useState(false);
-    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
 
@@ -40,7 +39,6 @@ const RecipesScreen = (props) =>  {
             querySnapshot.forEach((doc) => {
                 if(doc.data().username === props.login){
                     setUserIngredients(doc.data().ingredients)
-                    setUser(doc.data())
                     setDisplayRecipes(FindRecipes(parsedRecipes, doc.data().ingredients));
                 }
             });
