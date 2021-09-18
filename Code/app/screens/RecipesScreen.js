@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Colours from "../config/Colours";
-import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import Header from "../components/Header";
 import {db} from "../config/FirebaseConfig";
 import SearchBar from "../components/SearchBar";
@@ -9,6 +9,8 @@ import FindRecipes from "../utility/FindRecipes";
 import QueryFilter from "../utility/QueryFilter";
 import QuerySearch from "../utility/QuerySearch";
 import RecipeFilter from "../components/RecipeFilter";
+import SingleRecipeScreen from "./SingleRecipeScreen";
+import GetRecipeByName from "../utility/GetRecipeByName";
 
 const RecipesScreen = (props) =>  {
     //Firestore variables
@@ -18,6 +20,7 @@ const RecipesScreen = (props) =>  {
     const [retrievedRecipes, setRetrievedRecipes] = useState(false);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
+    const [recipeShowing, setRecipeShowing] = useState("");
 
     const ref = db.firestore().collection("recipes");
     const userRef = db.firestore().collection("Users");
@@ -83,28 +86,36 @@ const RecipesScreen = (props) =>  {
     }
 
     const touchHandler = (title) => {
-        console.log("Navigated to singlepage with "+title);
-        props.navigation.navigate("SingleRecipe", { title: title });
+        setRecipeShowing(title);
+    }
+
+    const pressBackHandler = () => {
+        setRecipeShowing("");
     }
 
     return (
-        <View style={styles.container}>
-            <Header title={"Recipes"} />
-            <View style={styles.searchBox}>
-                <SearchBar searchHandler={searchHandler}/>
-                <View style={{height: '5%'}} />
-                <RecipeFilter filterHandler={filterHandler} />
+        recipeShowing === "" ? (
+            <View style={styles.container}>
+                <Header title={"Recipes"}/>
+                <View style={styles.searchBox}>
+                    <SearchBar searchHandler={searchHandler}/>
+                    <View style={{height: '5%'}}/>
+                    <RecipeFilter filterHandler={filterHandler}/>
+                </View>
+                <View style={styles.listView}>
+                    <FlatList
+                        contentContainerStyle={styles.grid}
+                        numColumns={1}
+                        data={displayRecipes}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.Name}
+                    />
+                </View>
             </View>
-            <View style={styles.listView}>
-                <FlatList
-                    contentContainerStyle={styles.grid}
-                    numColumns={1}
-                    data={displayRecipes}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.Name}
-                />
-            </View>
-        </View>
+        ) : ( <SingleRecipeScreen title={recipeShowing}
+                                  recipe={GetRecipeByName(recipes, recipeShowing)}
+                                  pressBackHandler={pressBackHandler}
+        /> )
     );
 }
 
