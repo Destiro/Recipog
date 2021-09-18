@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Header from "../components/Header";
 import AddInput from "../components/AddInput";
 
-const MealPlannerScreen = (props) =>  {
+const MealPlannerScreen = () =>  {
 
     //Adds a grocery item to the list
     const submitHandler = (text) => {

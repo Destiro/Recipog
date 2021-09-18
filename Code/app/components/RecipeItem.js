@@ -4,8 +4,8 @@ import React from "react";
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 
-const RecipeItem = ({ title, diff, time, image }) => (
-    <TouchableWithoutFeedback onPress={() => console.log(title+" touched.")}>
+const RecipeItem = ({ title, diff, time, image, touchHandler }) => (
+    <TouchableWithoutFeedback onPress={() => touchHandler(title)}>
         <View style={styles.item}>
             <Image style={{width: '100%', height: '90%', paddingTop: 10}}
                    source={require('../assets/recipe_images/'+image)} />

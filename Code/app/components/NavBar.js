@@ -15,19 +15,10 @@ const RecipeStack = createStackNavigator();
 //Stack navigator from Recipes to Single Recipe
 const RecipeStackScreens = (props) => (
     <RecipeStack.Navigator initialRouteName={"Recipe"} screenOptions={{headerShown: false}}>
-        <RecipeStack.Screen name={"Recipe"} children={()=><RecipesScreen login={props.login}/>}/>
+        <RecipeStack.Screen name={"Recipe"} children={()=><RecipesScreen login={props.login} />}/>
         <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
     </RecipeStack.Navigator>
 );
-
-//Stack navigator from Liked to Single Recipe
-const LikedStackScreens = (props) => (
-    <RecipeStack.Navigator initialRouteName={"Liked"} screenOptions={{headerShown: false}}>
-        <RecipeStack.Screen name={"Liked"} children={()=><MealPlannerScreen login={props.login}/>}/>
-        <RecipeStack.Screen name={"SingleRecipe"} component={SingleRecipeScreen} />
-    </RecipeStack.Navigator>
-);
-
 
 const NavBar = ({route}) => {
     return (
@@ -46,7 +37,7 @@ const NavBar = ({route}) => {
             />
             <Tab.Screen
                 name="Recipes"
-                children={()=><RecipeStackScreens login={route.params.login}/>}
+                children={()=><RecipeStackScreens login={route.params.login} route={route}/>}
                 options={{
                     tabBarLabel: 'Recipes',
                     tabBarIcon: ({ color, size }) => (
@@ -56,7 +47,7 @@ const NavBar = ({route}) => {
             />
             <Tab.Screen
                 name="Liked Recipes"
-                children={()=><LikedStackScreens login={route.params.login}/>}
+                children={()=> <MealPlannerScreen />}
                 options={{
                     tabBarLabel: 'Meal Planner',
                     tabBarIcon: ({ color, size }) => (

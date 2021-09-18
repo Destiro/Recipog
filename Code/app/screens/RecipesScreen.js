@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Colours from "../config/Colours";
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
 import Header from "../components/Header";
 import {db} from "../config/FirebaseConfig";
 import SearchBar from "../components/SearchBar";
@@ -57,6 +57,7 @@ const RecipesScreen = (props) =>  {
             diff={item.Difficulty}
             time={item.Time}
             image={item.image}
+            touchHandler={touchHandler}
         />
     );
 
@@ -79,6 +80,11 @@ const RecipesScreen = (props) =>  {
         getRecipes();
         setRetrievedRecipes(true);
         setLoading(!loading);
+    }
+
+    const touchHandler = (title) => {
+        console.log("Navigated to singlepage with "+title);
+        props.navigation.navigate("SingleRecipe", { title: title });
     }
 
     return (

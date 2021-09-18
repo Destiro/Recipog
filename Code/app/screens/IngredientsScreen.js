@@ -110,7 +110,7 @@ const IngredientsScreen = (props) => {
 
     const searchHandler = (newSearch) => {
         setSearch(newSearch);
-        setFilterIngredients(QuerySearch(ingredients, newSearch));
+        setFilterIngredients(QuerySearch(ingredients, newSearch, true));
         setLoading(!loading);
     }
 
