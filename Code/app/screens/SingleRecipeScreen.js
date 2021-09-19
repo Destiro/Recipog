@@ -14,7 +14,7 @@ const SingleRecipeScreen = ({title, recipe, pressBackHandler}) =>  {
             <RecipeHeader title={title} difficulty={recipe.Difficulty} time={recipe.Time} />
             <Text style={styles.subHeading}> Ingredients </Text>
             <IngredientBoxList list={recipe.Ingredients} />
-            <View style={{width: '95%', alignItems: 'center'}}>
+            <View style={{width: '85%', alignItems: 'center'}}>
                 <Text style={styles.subHeading}> Instructions </Text>
                 <Text style={{fontSize: 18, alignSelf: 'center'}}>{recipe.Instructions}</Text>
             </View>
