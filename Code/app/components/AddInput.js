@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {StyleSheet, TextInput, Button, View} from "react-native";
-import Colours from "../config/Colours";
 
 export default function AddInput({pText, submitHandler, buttonText} ) {
     const [text, setText] = useState('')
@@ -10,7 +9,7 @@ export default function AddInput({pText, submitHandler, buttonText} ) {
     }
 
     return (
-        <View style={styles.addBar}>
+        <View>
             <TextInput
                 style={styles.input}
                 placeholder={pText}
