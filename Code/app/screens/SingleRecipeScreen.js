@@ -4,12 +4,12 @@ import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import BackFAB from "../components/BackFAB";
 import RecipeHeader from "../components/RecipeHeader";
 import IngredientBoxList from "../components/IngredientsBoxList";
+import ImageSlideShow from "../components/ImageSlideShow";
 
 const SingleRecipeScreen = ({title, recipe, pressBackHandler}) =>  {
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Image style={{width: '100%', height: '40%'}}
-                   source={require('../assets/recipe_images/'+recipe.image)} />
+            <ImageSlideShow imageString={recipe.image} />
             <BackFAB pressBackHandler={pressBackHandler} />
             <RecipeHeader title={title} difficulty={recipe.Difficulty} time={recipe.Time} />
             <Text style={styles.subHeading}> Ingredients </Text>
