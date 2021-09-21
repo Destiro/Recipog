@@ -1,6 +1,6 @@
 import React from 'react';
 import Colours from "../config/Colours";
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import BackFAB from "../components/BackFAB";
 import RecipeHeader from "../components/RecipeHeader";
 import IngredientBoxList from "../components/IngredientsBoxList";
