@@ -7,29 +7,21 @@ import AddInput from "../components/AddInput";
 import SaveFAB from "../components/SaveFAB";
 import ClearFAB from "../components/ClearFAB";
 import {db} from "../config/FirebaseConfig";
+import {FetchUserGroceries, SaveGroceries} from "../persistence/FirebaseFunctions";
 
 const GroceriesScreen = (props) =>  {
     // Reference to current users grocery list
-    const ref = db.firestore().collection("Users");
     const [groceries, setGroceries] = useState([]);
     const [user, setUser] = useState(null);
     const [loaded, setLoading] = useState(false);
 
     //Retrieve initial Grocery list from firestore
     useEffect(() => {
-        const fetchData = async() => {
-            try{
-                const response = await ref.doc(props.login).get();
-                if(response.exists){
-                    setUser(response.data());
-                    setGroceries(response.data().groceries);
-                    setLoading(true);
-                }
-            } catch(err) {
-                console.error(err);
-            }
-        }
-        fetchData();
+        FetchUserGroceries(props.login, function(userGroceries, user){
+            setUser(user);
+            setGroceries(userGroceries)
+        })
+        setLoading(true);
     }, [loaded]);
 
     //Removes a grocery item if tapped
@@ -53,17 +45,7 @@ const GroceriesScreen = (props) =>  {
 
     //Saves groceries to firebase
     const saveHandler = () => {
-        ref.doc(props.login).set({
-            username: user.username,
-            password: user.password,
-            ingredients: user.ingredients,
-            groceries: groceries,
-            favourites: user.favourites
-        }).then(function () {
-            console.log("Successfully saved groceries!");
-        }).catch(function (error) {
-            console.error("Error saving groceries: ", error)
-        });
+        SaveGroceries(props.login, user, groceries);
     }
 
     //Clears the grocery list

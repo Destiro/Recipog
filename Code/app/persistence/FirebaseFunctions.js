@@ -1,5 +1,4 @@
 import {db} from "../config/FirebaseConfig";
-import FindRecipes from "../utility/FindRecipes";
 
 /**
  * Firebase functions to retrieve and push data to firebase.
@@ -58,6 +57,29 @@ export function FetchUserIngredients(username, callback){
         querySnapshot.forEach((doc) => {
             if(doc.data().username === username){
                 callback(doc.data().ingredients, doc.data())
+            }
+        });
+    })
+}
+
+export function SaveGroceries(username, user, groceries){
+    db.firestore().collection("Users").doc(username).set({
+        username: user.username,
+        password: user.password,
+        ingredients: user.ingredients,
+        groceries: groceries,
+    }).then(function () {
+        console.log("Successfully saved groceries!");
+    }).catch(function (error) {
+        console.error("Error saving groceries: ", error)
+    });
+}
+
+export function FetchUserGroceries(username, callback){
+    db.firestore().collection("Users").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if(doc.data().username === username){
+                callback(doc.data().groceries, doc.data())
             }
         });
     })
