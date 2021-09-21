@@ -2,25 +2,18 @@ import {Image, Linking, StyleSheet, Text, View, Button} from "react-native";
 import React, {useEffect, useState} from "react";
 import Colours from "../config/Colours";
 import Display from "../config/Display";
+import {getMealImages} from "../persistence/APIFunctions";
 
 const MealComponent = ({ title, servings, prepTime, sourceURL, imageType, id}) => {
     const [imageUrl, setImageUrl] = useState("");
 
     useEffect(() => {
-        fetch(
-            `https://api.spoonacular.com/recipes/${id}/information?apiKey=a2b75871bb854b19a8b8d55d1c54fdac&includeNutrition=false`
-        )
-            .then((response)=> response.json())
-            .then((data) => {
-                setImageUrl(data.image);
-            })
-            .catch(() => {
-                console.log("error");
-            })
+        getMealImages(id, function(data){
+            setImageUrl(data);
+        });
     }, [id])
 
     function loadInBrowser() {
-        console.log("clicked to: "+sourceURL);
         Linking.openURL(sourceURL).catch(err => console.error("Couldn't load page", err));
     };
 

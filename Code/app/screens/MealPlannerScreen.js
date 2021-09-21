@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Header from "../components/Header";
 import CaloriesInput from "../components/CaloriesInput";
 import MealList from "../components/MealList";
-import getMealData from "../persistence/APIFunctions";
+import {getMealData} from "../persistence/APIFunctions";
 
 const MealPlannerScreen = () =>  {
     const [mealData, setMealData] = useState(null);
@@ -16,7 +16,6 @@ const MealPlannerScreen = () =>  {
             getMealData(calories, function(data){
                 setMealData(data);
             });
-            console.log("2"+mealData);
         }else{
             alert("Please enter a valid amount of Calories >:(");
         }
