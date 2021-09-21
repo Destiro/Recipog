@@ -4,13 +4,12 @@ import {TextInput} from "react-native-paper";
 
 import Colours from "../config/Colours";
 import {db} from "../config/FirebaseConfig";
+import {AddNewUser} from "../persistence/FirebaseFunctions";
 
 const SignupScreen = ({navigation}) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [password2, setPassword2] = React.useState('');
-
-    const ref = db.firestore().collection("Users");
 
     //Adds current inputted text as a new entry in firestore
     function addLogin(username, password, password2) {
@@ -18,18 +17,7 @@ const SignupScreen = ({navigation}) => {
             alert("Passwords do not match!!")
         } else {
             if (login !== '' && password !== '') {
-                ref.doc(username).set({
-                    username: username,
-                    password: password,
-                    ingredients: [],
-                    groceries: [],
-                    favourites: []
-                }).then(function () {
-                    console.log("User successfully added!");
-                }).catch(function (error) {
-                    console.error("Error adding user: ", error)
-                });
-
+                AddNewUser(login, password);
                 //Route back to login page
                 navigation.navigate("Login");
             } else {
@@ -51,7 +39,7 @@ const SignupScreen = ({navigation}) => {
                     onChangeText={text => setLogin(text)}
                     style={{backgroundColor: Colours.white}}
                 />
-                <View style={{paddingBottom: 20, backgroundColor: Colours.purple_primary}}/>
+                <View style={styles.space}/>
                 <TextInput
                     label="Password"
                     value={password}
@@ -59,7 +47,7 @@ const SignupScreen = ({navigation}) => {
                     onChangeText={text => setPassword(text)}
                     style={{backgroundColor: Colours.white}}
                 />
-                <View style={{paddingBottom: 20, backgroundColor: Colours.purple_primary}}/>
+                <View style={styles.space}/>
                 <TextInput
                     label="Confirm Password"
                     value={password2}
@@ -67,7 +55,7 @@ const SignupScreen = ({navigation}) => {
                     onChangeText={text => setPassword2(text)}
                     style={{backgroundColor: Colours.white}}
                 />
-                <View style={{paddingBottom: 20, backgroundColor: Colours.purple_primary}}/>
+                <View style={styles.space}/>
                 <Button title={"Create Account"} style={styles.button}
                         onPress={() => addLogin(login, password, password2)}/>
             </View>
@@ -119,6 +107,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: Colours.light_grey,
     },
+    space: {
+        paddingBottom: 20,
+        backgroundColor: Colours.purple_primary
+    }
 });
 
 export default SignupScreen;

@@ -3,7 +3,6 @@ import {StyleSheet, View, Text, FlatList} from 'react-native';
 
 import Colours from "../config/Colours";
 import Display from "../config/Display";
-import {db} from "../config/FirebaseConfig";
 import Header from "../components/Header";
 import IngredientItem from "../components/IngredientItem";
 import SaveFAB from "../components/SaveFAB";
@@ -12,6 +11,7 @@ import SearchBar from "../components/SearchBar";
 import IngredientsFilter from "../components/IngredientsFilter";
 import QueryFilter from "../utility/QueryFilter";
 import QuerySearch from "../utility/QuerySearch";
+import {FetchIngredients, FetchUserIngredients, SaveIngredients} from "../persistence/FirebaseFunctions";
 
 const IngredientsScreen = (props) => {
     //Wall of state variables :(((((((
@@ -23,40 +23,8 @@ const IngredientsScreen = (props) => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
 
-    const ref = db.firestore().collection("Ingredients");
-    const userRef = db.firestore().collection("Users");
-
-    //Loads data from firestore
-    function getIngredients() {
-        ref.onSnapshot((querySnapshot) => {
-            const items = [];
-            querySnapshot.forEach((doc) => {
-                items.push(doc.data());
-            });
-            setIngredients(items);
-            setFilterIngredients(items);
-        })
-    }
-
-    const fetchUser = async() => {
-        try{
-            const response = await userRef.doc(props.login).get();
-            if(response.exists){
-
-                if(user === null) {
-                    setUserIngredients(response.data().ingredients);
-                }
-                setUser(response.data());
-            }
-        } catch(err) {
-            console.error(err);
-        }
-    }
-
-    //Loads user data from firestore
-    useEffect(() => {
-
-    }, [loading])
+    //Force re-render on loading change
+    useEffect(() => {}, [loading])
 
     //User taps on an ingredient functionality
     const touchHandler = (title) => {
@@ -81,17 +49,7 @@ const IngredientsScreen = (props) => {
 
     //Saves ingredients to firebase
     const saveHandler = () => {
-        userRef.doc(props.login).set({
-            username: user.username,
-            password: user.password,
-            ingredients: userIngredients,
-            groceries: user.groceries,
-            favourites: user.favourites
-        }).then(function () {
-            console.log("Successfully saved ingredients!");
-        }).catch(function (error) {
-            console.error("Error saving ingredients: ", error)
-        });
+        SaveIngredients(user, props.login, userIngredients);
     }
 
     //Clears the user ingredients list
@@ -124,10 +82,18 @@ const IngredientsScreen = (props) => {
         />
     );
 
-    //Loads user and ingredient data
+    //Loads user and ingredient data only once
     if(!retrievedIngreds){
-        fetchUser();
-        getIngredients();
+        FetchUserIngredients(props.login, function(userIngreds, user){
+            setUserIngredients(userIngreds);
+            setUser(user);
+        })
+
+        FetchIngredients(function(data){
+            setIngredients(data);
+            setFilterIngredients(data);
+        });
+
         setRetrievedIngreds(true);
     }
 
