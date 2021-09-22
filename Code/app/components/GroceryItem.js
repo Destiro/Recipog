@@ -2,6 +2,14 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import Colours from "../config/Colours";
 
+/**
+ * Displays the individual item in the grocery list on the grocery list page.
+ *
+ * @param item
+ * @param pressHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function GroceryItem({ item, pressHandler }) {
 
     return (

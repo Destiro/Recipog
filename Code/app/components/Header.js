@@ -2,6 +2,14 @@ import React from 'react';
 import {StyleSheet, View, Text} from "react-native";
 import Colours from "../config/Colours";
 
+/**
+ * Used at the top of each major page, showing the title of the page
+ * so the user knows which page they are currently on.
+ *
+ * @param title
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Header = ({title}) => {
     return(
       <View style={styles.headerBox}>

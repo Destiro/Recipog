@@ -3,6 +3,13 @@ import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import Colours from "../config/Colours";
 
+/**
+ * Floating action button for the user to save their ingredients / groceries
+ *
+ * @param saveHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SaveFAB = ({saveHandler}) => (
     <FAB
         style={styles.fab}

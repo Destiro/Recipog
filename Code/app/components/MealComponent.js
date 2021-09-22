@@ -4,6 +4,18 @@ import Colours from "../config/Colours";
 import Display from "../config/Display";
 import {getMealImages} from "../persistence/APIFunctions";
 
+/**
+ * Displaying an individual meal item in the meal component page.
+ *
+ * @param title
+ * @param servings
+ * @param prepTime
+ * @param sourceURL
+ * @param imageType
+ * @param id
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MealComponent = ({ title, servings, prepTime, sourceURL, imageType, id}) => {
     const [imageUrl, setImageUrl] = useState("");
 
@@ -16,7 +28,6 @@ const MealComponent = ({ title, servings, prepTime, sourceURL, imageType, id}) =
     function loadInBrowser() {
         Linking.openURL(sourceURL).catch(err => console.error("Couldn't load page", err));
     };
-
 
     return (
         <View style={styles.item}>

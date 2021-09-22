@@ -2,6 +2,15 @@ import React from 'react';
 import {StyleSheet, View, Text} from "react-native";
 import Colours from "../config/Colours";
 
+/**
+ * Shows the title and desc for recipes in the single recipe screen.
+ *
+ * @param title
+ * @param difficulty
+ * @param time
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const RecipeHeader = ({title, difficulty, time}) => {
     return(
         <View style={styles.headerBox}>

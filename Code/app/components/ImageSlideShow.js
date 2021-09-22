@@ -2,6 +2,14 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
 import Colours from "../config/Colours";
 
+/**
+ * A slideshow that displays 3 recipe images for the current
+ * recipe the user has selected.
+ *
+ * @param imageString
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ImageSlideShow({imageString}) {
     const [current, setCurrent] = useState(0);
 

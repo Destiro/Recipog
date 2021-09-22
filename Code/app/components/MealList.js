@@ -5,6 +5,13 @@ import Display from "../config/Display";
 import MealComponent from "./MealComponent";
 import ShortenWords from "../utility/ShortenWords";
 
+/**
+ * List for displaying the meals in the meal planner page
+ *
+ * @param mealData
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function MealList({mealData}) {
     const nutrients = mealData.nutrients;
 

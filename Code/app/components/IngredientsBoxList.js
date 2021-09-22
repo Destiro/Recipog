@@ -4,6 +4,13 @@ import Colours from "../config/Colours";
 import ConvertObjToArray from "../utility/ConvertObjToArray";
 import Display from "../config/Display";
 
+/**
+ * Creates a list for rendering each ingredient item for the ingredients screen.
+ *
+ * @param list
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const IngredientBoxList = ({list}) => {
     const renderItem = ({ item }) => (
         <View style={{width: Display.width/2.2}}>

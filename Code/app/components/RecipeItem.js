@@ -1,9 +1,20 @@
-//Renders an Individual Ingredient
 import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
 import React from "react";
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 
+/**
+ * Shows each recipe in the recipe page
+ * as a block with and image and accompanying text
+ *
+ * @param title
+ * @param diff
+ * @param time
+ * @param image
+ * @param touchHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const RecipeItem = ({ title, diff, time, image, touchHandler }) => (
     <TouchableWithoutFeedback onPress={() => touchHandler(title)}>
         <View style={styles.item}>

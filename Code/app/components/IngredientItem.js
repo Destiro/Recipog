@@ -1,9 +1,12 @@
-//Renders an Individual Ingredient
 import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
 import React, { PureComponent } from 'react';
 import Colours from "../config/Colours";
 import Display from "../config/Display";
 
+/**
+ * Renders an individual ingredient block in the ingredients screen
+ * displaying the image and accompanying text
+ */
 class IngredientItem extends PureComponent {
     render () {
         return (

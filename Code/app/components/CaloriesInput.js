@@ -1,6 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, Button, View} from "react-native";
 
+/**
+ * Text input and button for the user to insert how many calories for their meal plan.
+ *
+ * @param pText
+ * @param submitHandler
+ * @param buttonText
+ * @param textHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AddInput({pText, submitHandler, buttonText, textHandler}) {
     const [text, setText] = useState('')
 

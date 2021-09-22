@@ -10,6 +10,13 @@ import IngredientsScreen from "../screens/IngredientsScreen";
 
 const Tab = createBottomTabNavigator();
 
+/**
+ * Tab navigator, provides navigation to the 4 primary pages of my app.
+ *
+ * @param route
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const NavBar = ({route}) => {
     return (
         <Tab.Navigator

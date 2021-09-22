@@ -2,9 +2,17 @@ import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
 import {StyleSheet} from "react-native";
 
+/**
+ * Search bar component, for user to run queries on recipes / ingredients
+ *
+ * @param searchHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SearchBar = ({searchHandler}) => {
     const [searchQuery, setSearchQuery] = React.useState('');
 
+    //Changes query variable when typing
     const onChangeSearch = query => {
         setSearchQuery(query);
         searchHandler(query);

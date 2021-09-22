@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import {StyleSheet, TextInput, Button, View} from "react-native";
 
+/**
+ * A text input and a button for inputting new items into a grocery list.
+ *
+ * @param pText
+ * @param submitHandler
+ * @param buttonText
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AddInput({pText, submitHandler, buttonText} ) {
     const [text, setText] = useState('')
 

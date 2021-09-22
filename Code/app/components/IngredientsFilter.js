@@ -2,7 +2,13 @@ import React, {useEffect, useState} from "react";
 import { StyleSheet } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 
-
+/**
+ * Filter box for the ingredients page, used to query ingredients.
+ *
+ * @param filterHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const IngredientsFilter = ({filterHandler}) => {
     const [category, setCategory] = useState("All Categories");
 

@@ -1,8 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { StyleSheet } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 
-
+/**
+ * Filter box for my recipes page
+ *
+ * @param filterHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const RecipeFilter = ({filterHandler}) => {
     const [category, setCategory] = useState("All Categories");
 
