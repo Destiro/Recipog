@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 
 import Colours from "../config/Colours";
 import Display from "../config/Display";
@@ -13,6 +13,14 @@ import QueryFilter from "../utility/QueryFilter";
 import QuerySearch from "../utility/QuerySearch";
 import {FetchIngredients, FetchUserIngredients, SaveIngredients} from "../persistence/FirebaseFunctions";
 
+/**
+ * Ingredients Screen, the user can select ingredients they have in their pantry
+ * to find out recipes they can cook with.
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const IngredientsScreen = (props) => {
     //Wall of state variables :(((((((
     const [ingredients, setIngredients] = useState([]);
@@ -58,6 +66,7 @@ const IngredientsScreen = (props) => {
         setLoading(!loading);
     }
 
+    //User changes a filter category
     const filterHandler = (filter) => {
         if(ingredients !== []){
             setFilterIngredients(QueryFilter(ingredients, filter, true))
@@ -66,6 +75,7 @@ const IngredientsScreen = (props) => {
         }
     }
 
+    //User searches with the search bar
     const searchHandler = (newSearch) => {
         setSearch(newSearch);
         setFilterIngredients(QuerySearch(ingredients, newSearch, true));

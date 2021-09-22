@@ -1,3 +1,13 @@
+/**
+ * Checks either tags for recipes or category for ingredients
+ * and dependent on the criteria chosen, return a list with items only matching that criteria.
+ *
+ * @param list
+ * @param filter
+ * @param isIngredient
+ * @returns {[]|*[]|*}
+ * @constructor
+ */
 export default function QueryFilter(list, filter, isIngredient){
     let returnedList = [];
     if(list === []){ return [] }

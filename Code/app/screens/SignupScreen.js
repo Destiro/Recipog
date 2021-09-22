@@ -3,9 +3,15 @@ import {StyleSheet, View, Text, Button, TouchableWithoutFeedback} from 'react-na
 import {TextInput} from "react-native-paper";
 
 import Colours from "../config/Colours";
-import {db} from "../config/FirebaseConfig";
 import {AddNewUser} from "../persistence/FirebaseFunctions";
 
+/**
+ * Signup page for the user to create an account and push that to firebase.
+ *
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SignupScreen = ({navigation}) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');

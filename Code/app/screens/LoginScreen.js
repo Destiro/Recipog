@@ -6,6 +6,14 @@ import Colours from "../config/Colours";
 import CheckLogin from "../utility/CheckLogin";
 import {getUsers} from "../persistence/FirebaseFunctions";
 
+/**
+ * Login to account to continue using the application or
+ * navigate to the signup page.
+ *
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const LoginScreen = ({navigation}) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');

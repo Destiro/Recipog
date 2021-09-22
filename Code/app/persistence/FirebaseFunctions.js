@@ -5,6 +5,12 @@ import FindRecipes from "../utility/FindRecipes";
  * Firebase functions to retrieve and push data to firebase.
  * Used in different pages, pulling different data.
  */
+
+/**
+ * Getting all users from firestore
+ *
+ * @param callback
+ */
 export function getUsers(callback) {
     db.firestore().collection("Users").onSnapshot((querySnapshot) => {
         const users = [];
@@ -15,6 +21,13 @@ export function getUsers(callback) {
     })
 }
 
+/**
+ * Adding a new user to the user database
+ *
+ * @param username
+ * @param password
+ * @constructor
+ */
 export function AddNewUser(username, password) {
     db.firestore().collection("Users").doc(username).set({
         username: username,
@@ -28,6 +41,12 @@ export function AddNewUser(username, password) {
     });
 }
 
+/**
+ * Fetching all ingredients to display on the ingredients screen from firestore
+ *
+ * @param callback
+ * @constructor
+ */
 export function FetchIngredients(callback){
     db.firestore().collection("Ingredients").onSnapshot((querySnapshot) => {
         const items = [];
@@ -38,9 +57,15 @@ export function FetchIngredients(callback){
     })
 }
 
+/**
+ * Saving the user's selected ingredients to firestore to load on-launch later
+ *
+ * @param user
+ * @param username
+ * @param userIngredients
+ * @constructor
+ */
 export function SaveIngredients(user, username, userIngredients){
-    console.log(user);
-    console.log(username);
     db.firestore().collection("Users").doc(username).set({
         username: user.username,
         password: user.password,
@@ -53,6 +78,13 @@ export function SaveIngredients(user, username, userIngredients){
     });
 }
 
+/**
+ * Fetching the users selected ingredients.
+ *
+ * @param username
+ * @param callback
+ * @constructor
+ */
 export function FetchUserIngredients(username, callback){
     db.firestore().collection("Users").onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -63,6 +95,14 @@ export function FetchUserIngredients(username, callback){
     })
 }
 
+/**
+ * Storing the users groceries on firestore.
+ *
+ * @param username
+ * @param user
+ * @param groceries
+ * @constructor
+ */
 export function SaveGroceries(username, user, groceries){
     db.firestore().collection("Users").doc(username).set({
         username: user.username,
@@ -76,6 +116,13 @@ export function SaveGroceries(username, user, groceries){
     });
 }
 
+/**
+ * Fetching the users groceries from firestore.
+ *
+ * @param username
+ * @param callback
+ * @constructor
+ */
 export function FetchUserGroceries(username, callback){
     db.firestore().collection("Users").onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -86,6 +133,13 @@ export function FetchUserGroceries(username, callback){
     })
 }
 
+/**
+ * Fetching the recipes to be displayed on the recipes screen from firestore.
+ *
+ * @param username
+ * @param callback
+ * @constructor
+ */
 export function FetchRecipes(username, callback) {
     db.firestore().collection("recipes").onSnapshot((querySnapshot) => {
         const items = [];
@@ -96,6 +150,13 @@ export function FetchRecipes(username, callback) {
     })
 }
 
+/**
+ * Getting the user's recipes from firestore.
+ *
+ * @param recipes
+ * @param username
+ * @param callback
+ */
 function getUserRecipes(recipes, username, callback) {
     db.firestore().collection("Users").onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {

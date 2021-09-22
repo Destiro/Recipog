@@ -9,6 +9,13 @@ import ClearFAB from "../components/ClearFAB";
 import {db} from "../config/FirebaseConfig";
 import {FetchUserGroceries, SaveGroceries} from "../persistence/FirebaseFunctions";
 
+/**
+ * Grocery list screen: User can add and remove groceries that they intend to shop for.
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const GroceriesScreen = (props) =>  {
     // Reference to current users grocery list
     const [groceries, setGroceries] = useState([]);

@@ -2,10 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Colours from "../config/Colours";
 import {FlatList, StyleSheet, View} from 'react-native';
 import Header from "../components/Header";
-import {db} from "../config/FirebaseConfig";
 import SearchBar from "../components/SearchBar";
 import RecipeItem from "../components/RecipeItem";
-import FindRecipes from "../utility/FindRecipes";
 import QueryFilter from "../utility/QueryFilter";
 import QuerySearch from "../utility/QuerySearch";
 import RecipeFilter from "../components/RecipeFilter";
@@ -13,6 +11,14 @@ import SingleRecipeScreen from "./SingleRecipeScreen";
 import GetRecipeByName from "../utility/GetRecipeByName";
 import {FetchRecipes} from "../persistence/FirebaseFunctions";
 
+/**
+ * Recipes screen to display all recipes the user can cook with
+ * given the ingredients they currently have.
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const RecipesScreen = (props) =>  {
     //Firestore variables
     const [recipes, setRecipes] = useState([]);
@@ -37,6 +43,7 @@ const RecipesScreen = (props) =>  {
         />
     );
 
+    //User uses filter dropdown, reduce results to context
     const filterHandler = (filter) => {
         if(recipes !== []){
             setDisplayRecipes(QueryFilter(recipes, filter, false))
@@ -45,16 +52,19 @@ const RecipesScreen = (props) =>  {
         }
     }
 
+    //The user uses the search bar, reduce results to context
     const searchHandler = (newSearch) => {
         setSearch(newSearch);
         setDisplayRecipes(QuerySearch(recipes, newSearch));
         setLoading(!loading);
     }
 
+    //Taps on a recipe, open up that recipe's screen
     const touchHandler = (title) => {
         setRecipeShowing(title);
     }
 
+    //User presses back button, return to recipes screen
     const pressBackHandler = () => {
         setRecipeShowing("");
     }

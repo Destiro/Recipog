@@ -1,3 +1,13 @@
+/**
+ * Given the users login and password, check if this is valid
+ * so that the user can create a new account.
+ *
+ * @param login
+ * @param password
+ * @param users
+ * @returns {boolean}
+ * @constructor
+ */
 export default function CheckLogin(login, password, users){
     let isValidName = false;
     if (login !== '' && password !== '') {

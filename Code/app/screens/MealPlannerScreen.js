@@ -6,6 +6,13 @@ import CaloriesInput from "../components/CaloriesInput";
 import MealList from "../components/MealList";
 import {getMealData} from "../persistence/APIFunctions";
 
+/**
+ * Meal planner screen to display 3 meals for the day based on
+ * the amount of calories the user inputs.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MealPlannerScreen = () =>  {
     const [mealData, setMealData] = useState(null);
     const[calories, setCalories] = useState("");

@@ -13,6 +13,7 @@ const firebaseConfig = {
     measurementId: Env.measurementId
 };
 
+//Checks if the firebase object is initialized, if so then retrieve it.
 const getFirebase = () => {
     if(!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);

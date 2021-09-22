@@ -6,6 +6,16 @@ import RecipeHeader from "../components/RecipeHeader";
 import IngredientBoxList from "../components/IngredientsBoxList";
 import ImageSlideShow from "../components/ImageSlideShow";
 
+/**
+ * Single recipe page to display the details of a particular recipe
+ * that the user selected from the recipe list page.
+ *
+ * @param title
+ * @param recipe
+ * @param pressBackHandler
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SingleRecipeScreen = ({title, recipe, pressBackHandler}) =>  {
     return (
         <ScrollView contentContainerStyle={styles.container}>
