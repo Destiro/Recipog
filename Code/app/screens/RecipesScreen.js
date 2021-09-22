@@ -11,6 +11,7 @@ import QuerySearch from "../utility/QuerySearch";
 import RecipeFilter from "../components/RecipeFilter";
 import SingleRecipeScreen from "./SingleRecipeScreen";
 import GetRecipeByName from "../utility/GetRecipeByName";
+import {FetchRecipes} from "../persistence/FirebaseFunctions";
 
 const RecipesScreen = (props) =>  {
     //Firestore variables
@@ -22,36 +23,8 @@ const RecipesScreen = (props) =>  {
     const [search, setSearch] = useState("");
     const [recipeShowing, setRecipeShowing] = useState("");
 
-    const ref = db.firestore().collection("recipes");
-    const userRef = db.firestore().collection("Users");
-
-    //Loads data from firestore
-    async function getRecipes() {
-        await ref.onSnapshot((querySnapshot) => {
-            const items = [];
-            querySnapshot.forEach((doc) => {
-                items.push(doc.data());
-            });
-            setRecipes(items);
-            fetchUser(items)
-        })
-    }
-
-    async function fetchUser(parsedRecipes) {
-        await userRef.onSnapshot((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                if(doc.data().username === props.login){
-                    setUserIngredients(doc.data().ingredients)
-                    setDisplayRecipes(FindRecipes(parsedRecipes, doc.data().ingredients));
-                }
-            });
-        })
-    }
-
     //Loads user data from firestore
-    useEffect(() => {
-        //setDisplayRecipes(FindRecipes(recipes, userIngredients));
-    }, [loading])
+    useEffect(() => {}, [loading])
 
     //Lazy renders ingredients
     const renderItem = ({ item }) => (
@@ -78,19 +51,23 @@ const RecipesScreen = (props) =>  {
         setLoading(!loading);
     }
 
-    //Loads user and ingredient data
-    if(!retrievedRecipes){
-        getRecipes();
-        setRetrievedRecipes(true);
-        setLoading(!loading);
-    }
-
     const touchHandler = (title) => {
         setRecipeShowing(title);
     }
 
     const pressBackHandler = () => {
         setRecipeShowing("");
+    }
+
+    //Loads user and ingredient data
+    if(!retrievedRecipes){
+        FetchRecipes(props.login, function(recipes, userIngreds, displayRecipes){
+            setRecipes(recipes);
+            setUserIngredients(userIngreds);
+            setDisplayRecipes(displayRecipes);
+        })
+        setRetrievedRecipes(true);
+        setLoading(!loading);
     }
 
     return (
