@@ -1,17 +1,12 @@
 # Recipog
 
-## Student Information
 | | |
 ------------ | -------------
 **Name** | Connor de Bruyn
 **Username** | Destiro
-**Assignment** | SWEN325 A2
 
 ## Description
 “Recipog” is a recipe providing app that allows the user to input ingredients from their pantry and then be provided with food options they can make using the ingredients they have. The app has other functionality such as displaying a meal planner which creates daily meals based on the amount of calories the user inputs. 
-
-## Demo Video
-https://youtu.be/7Bk-xZ31sQg
 
 ## Hand Over Document (How to setup)
 1. First git pull the project repo to your local computer
